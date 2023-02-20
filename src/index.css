@@ -11,4 +11,6 @@
   --pending-backround-color: #ff8f00;
   --paid-text-color: #33d69f;
   --paid-background-color: #33d69f;
+  --padding: 2rem, 1rem;
+  --margin: 1.5rem;
 }

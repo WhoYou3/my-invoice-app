@@ -1,10 +1,11 @@
-import { Navbar } from "./Containers";
+import { Navbar, Invoices } from "./Containers";
 import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <div className="test">
+    <div className="app-container">
       <Navbar />
+      <Invoices />
     </div>
   );
 };

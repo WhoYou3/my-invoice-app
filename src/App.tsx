@@ -1,10 +1,10 @@
-import SideBar from "./Containers/Navbar/Navbar";
+import { Navbar } from "./Containers";
 import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <div>
-      <SideBar />
+    <div className="test">
+      <Navbar />
     </div>
   );
 };

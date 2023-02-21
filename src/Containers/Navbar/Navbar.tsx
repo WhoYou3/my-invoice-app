@@ -1,15 +1,12 @@
 import "./navbar.css";
-import imageAvatar from "../../assets/image-avatar.jpg";
-import logo from "../../assets/logo.svg";
-import iconMoon from "../../assets/icon-moon.svg";
+import { iconMoon, imageAvatar, logo, iconSun } from "../../assets";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-
 import { toggleMode } from "../../store/features/toggleModeleSlice";
 
 const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();
-  const test = useAppSelector((state) => state.toggle.isDark);
-  console.log(test);
+  const isDarkMode = useAppSelector((state) => state.toggle.isDark);
+
   return (
     <nav className="navbar">
       <div className="navbar__nav-logo">
@@ -19,8 +16,8 @@ const Navbar: React.FC = () => {
         <div className="navbar__nav-switcher">
           <img
             onClick={() => dispatch(toggleMode())}
-            src={iconMoon}
-            alt="icon-moon"
+            src={isDarkMode ? iconSun : iconMoon}
+            alt="icon-moon/sun"
           ></img>
         </div>
         <div className="navbar__nav-avatar">

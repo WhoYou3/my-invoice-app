@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/dist/createAction";
 
 export interface toggleModeStatus {
   isDark: boolean;
@@ -13,8 +12,8 @@ export const ToggleModeSlice = createSlice({
   name: "toggleMode",
   initialState: initialState,
   reducers: {
-    toggleMode: (state, action: PayloadAction<boolean>) => {
-      state.isDark = !action.payload;
+    toggleMode: (state) => {
+      state.isDark = !state.isDark;
     },
   },
 });

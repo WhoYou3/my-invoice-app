@@ -1,0 +1,10 @@
+.backlink {
+  display: flex;
+
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.backlink img {
+  height: 10px;
+}

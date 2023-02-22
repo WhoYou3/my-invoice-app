@@ -7,7 +7,6 @@ interface Props {
 }
 
 const Invoice = ({ invoice }: Props) => {
-  console.log(invoice);
   return (
     <div className="invoice__invoice">
       <div className="invoice__invoice-header">

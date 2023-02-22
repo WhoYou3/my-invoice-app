@@ -1,0 +1,8 @@
+.invoiceMaker {
+  border: 1px yellow solid;
+  background-color: var(--dark-theme-background-color);
+  position: absolute;
+  width: 100%;
+  top: 73px;
+  padding: 1.5rem 1rem;
+}

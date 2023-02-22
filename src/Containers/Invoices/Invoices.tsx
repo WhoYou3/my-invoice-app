@@ -3,7 +3,7 @@ import { db } from "../../firebase/firebase-config";
 import { InvoiceType } from "./InvoiceType";
 import { collection, getDocs, CollectionReference } from "firebase/firestore";
 import { DocumentData } from "firebase/firestore";
-import Invoice from "../../components/Invoice/Invoice";
+import Invoice from "../../components/InvoiceSketch/Invoice";
 import InvoiceNavigation from "../../components/InvoiceNavigation/InvoiceNavigation";
 import "./Invoices.css";
 
@@ -28,12 +28,11 @@ const Invoices = () => {
     getUsers();
   }, []);
 
-  console.log(invoices);
   return (
     <div className="invoices__invoices-container">
       <InvoiceNavigation />
       {invoices.map((invoice) => (
-        <Invoice invoice={invoice} />
+        <Invoice key={invoice.id} invoice={invoice} />
       ))}
     </div>
   );

@@ -1,7 +1,15 @@
-import "./invoiceNavigation.css";
+import { useAppDispatch } from "../../store/store";
+import { openAddForm } from "../../store/features/isAddingNewInvoice";
 import { iconPlus, iconArrowDown } from "../../assets";
+import "./invoiceNavigation.css";
 
 const InvoiceNavigation = () => {
+  const dispatch = useAppDispatch();
+
+  const openInvoiceForm = () => {
+    dispatch(openAddForm());
+  };
+
   return (
     <div className="invoices__invoice-navigation">
       <div className="invoices__invoice-navigation_title">
@@ -15,7 +23,10 @@ const InvoiceNavigation = () => {
           </p>
           <img src={iconArrowDown} alt="arrow down" />
         </div>
-        <div className="invoices__invoice-navigation_add">
+        <div
+          onClick={openInvoiceForm}
+          className="invoices__invoice-navigation_add"
+        >
           <div>
             <img src={iconPlus} alt="icon-plus" />
           </div>

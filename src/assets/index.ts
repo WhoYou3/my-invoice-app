@@ -4,5 +4,14 @@ import logo from "./logo.svg";
 import iconSun from "./icon-sun.svg";
 import iconPlus from "./icon-plus.svg";
 import iconArrowDown from "./icon-arrow-down.svg";
+import iconArrowLeft from "./icon-arrow-left.svg";
 
-export { iconMoon, imageAvatar, logo, iconSun, iconPlus, iconArrowDown };
+export {
+  iconMoon,
+  imageAvatar,
+  logo,
+  iconSun,
+  iconArrowLeft,
+  iconPlus,
+  iconArrowDown,
+};

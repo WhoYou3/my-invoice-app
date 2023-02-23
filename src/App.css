@@ -50,6 +50,11 @@ h3 {
   background-color: var(--dark-theme-background-color);
 }
 
+input {
+  border: none;
+  outline: none;
+}
+
 @media screen and (min-width: 600px) {
   h3 {
     font-weight: 700;

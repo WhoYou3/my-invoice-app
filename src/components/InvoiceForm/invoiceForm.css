@@ -5,18 +5,73 @@
 .invoiceForm__form-container {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.invoiceForm__form-container p span {
+  color: #7c5dfa;
 }
 
 .invoiceForm__form-container input {
-  width: 100px;
-  display: inline;
-}
-.invoiceForm__form-container label {
-  width: 100px;
+  width: 100%;
+  height: 48px;
+  padding-left: 1rem;
+  color: #ffff;
+  background-color: var(--sidebar-color);
+  font-weight: 700;
 }
 
-.invoiceForm__form-container input,
+.light .invoiceForm__form-container input {
+  background-color: var(--dark-theme-text-color);
+  color: var(--light-theme-text-color);
+}
+
 .invoiceForm__form-container label {
-  border: 1px blue solid;
+  width: 100px;
+  margin: 1.5rem 0 0.5rem 0;
+}
+
+.invoiceForm__form-container select {
+  background-color: var(--sidebar-color);
+  border: none;
+  color: var(--dark-theme-text-color);
+  cursor: pointer;
+  height: 48px;
+  padding-left: 1rem;
+  outline: none;
+}
+
+.light .invoiceForm__form-container select {
+  background-color: var(--dark-theme-text-color);
+  color: var(--light-theme-text-color);
+}
+
+.invoiceForm__form-container_items {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.invoiceForm__form-container_items div {
+  width: 25%;
+}
+
+.invoiceForm__form-button {
+  width: 100%;
+  background-color: var(--sidebar-color);
+  outline: none;
+  border: none;
+  border-radius: 24px;
+  height: 48px;
+  margin-top: 1.5rem;
+  color: var(--dark-theme-text-color);
+}
+
+.light .invoiceForm__form-button {
+  background-color: #f9fafe;
+  color: var(--light-theme-text-color);
+}
+.invoiceForm__form-button_container {
+  display: flex;
+  gap: 5px;
 }

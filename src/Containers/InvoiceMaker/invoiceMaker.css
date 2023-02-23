@@ -4,8 +4,27 @@
   width: 100%;
   top: 73px;
   padding: 1.5rem 1rem;
+  z-index: 3;
 }
 
 .light .invoiceMaker {
   background-color: var(--light-theme-background-color);
+}
+
+@media screen and (min-width: 1024px) {
+  .invoiceMaker {
+    width: 500px;
+    left: 103px;
+  }
+
+  .shadow {
+    position: absolute;
+    top: -73px;
+    left: 500px;
+
+    width: calc(100dvw - 603px);
+    height: 100dvh;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }

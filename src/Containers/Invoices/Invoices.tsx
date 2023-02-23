@@ -3,8 +3,7 @@ import { db } from "../../firebase/firebase-config";
 import { InvoiceType } from "./InvoiceType";
 import { collection, getDocs, CollectionReference } from "firebase/firestore";
 import { DocumentData } from "firebase/firestore";
-import Invoice from "../../components/InvoiceSketch/Invoice";
-import InvoiceNavigation from "../../components/InvoiceNavigation/InvoiceNavigation";
+import { Invoice, InvoiceNavigation } from "../../components/index";
 import "./Invoices.css";
 
 const Invoices = () => {

@@ -1,8 +1,20 @@
 .invoiceForm__form {
   margin-top: 1.5rem;
 
-  overflow-x: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
   height: calc(100dvh - 230px);
+  padding-right: 5px;
+}
+
+.invoiceForm__form::-webkit-scrollbar {
+  width: 5px;
+
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.invoiceForm__form::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .invoiceForm__form-container {
@@ -60,6 +72,15 @@
   margin-top: 1rem;
 }
 
+.invoiceForm__form-container_items .invoiceForm__form-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 10px;
+  cursor: pointer;
+}
+
 .invoiceForm__form-container_items li .invoiceForm__form-container_item {
   display: flex;
 
@@ -84,6 +105,7 @@
   height: 48px;
   margin-top: 1.5rem;
   color: var(--dark-theme-text-color);
+  cursor: pointer;
 }
 
 .light .invoiceForm__form-button {

@@ -1,13 +1,25 @@
 import React from "react";
 import { useState } from "react";
+import { iconDelete } from "../../assets";
 
 import "./invoiceForm.css";
 
+interface element {
+  id: number;
+  element: string;
+}
+
 const InvoiceForm: React.FC = () => {
-  const [items, setItems] = useState<String[]>([]);
+  const [items, setItems] = useState<element[]>([]);
   const addNewItemField = () => {
-    setItems((prevItems) => [...prevItems, "element"]);
+    const newId = items.length + 1;
+    setItems((prevItems) => [...prevItems, { id: newId, element: "element" }]);
   };
+  const deleteItem = (id: number): void => {
+    const filtredItems = items.filter((item) => item.id !== id);
+    setItems(filtredItems);
+  };
+  console.log(items);
 
   return (
     <>
@@ -63,7 +75,7 @@ const InvoiceForm: React.FC = () => {
           <ul className="invoiceForm__form-container_items">
             {items.map((item) => (
               <>
-                <li>
+                <li key={item.id}>
                   <label htmlFor="ItemName">Item Name</label>
                   <input
                     type="text"
@@ -82,6 +94,13 @@ const InvoiceForm: React.FC = () => {
                     <div>
                       <label>Value</label>
                       <input value="156" disabled />
+                    </div>
+                    <div className="invoiceForm__form-img">
+                      <img
+                        onClick={() => deleteItem(item.id)}
+                        src={iconDelete}
+                        alt="delete-icon"
+                      ></img>
                     </div>
                   </div>
                 </li>

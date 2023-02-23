@@ -1,0 +1,22 @@
+.invoiceForm__form {
+  margin-top: 1.5rem;
+}
+
+.invoiceForm__form-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.invoiceForm__form-container input {
+  width: 100px;
+  display: inline;
+}
+.invoiceForm__form-container label {
+  width: 100px;
+}
+
+.invoiceForm__form-container input,
+.invoiceForm__form-container label {
+  border: 1px blue solid;
+}

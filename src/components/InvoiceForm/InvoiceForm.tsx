@@ -1,8 +1,14 @@
 import React from "react";
+import { useState } from "react";
 
 import "./invoiceForm.css";
 
-const InvoiceForm = () => {
+const InvoiceForm: React.FC = () => {
+  const [items, setItems] = useState<String[]>([]);
+  const addNewItemField = () => {
+    setItems((prevItems) => [...prevItems, "element"]);
+  };
+
   return (
     <>
       <form className="invoiceForm__form">
@@ -53,10 +59,35 @@ const InvoiceForm = () => {
           <p>
             <span>Item List</span>
           </p>
-          <label htmlFor="ItemName">Item Name</label>
-          <input type="text" id="itemName" placeholder="Banner Design etc." />
-          <div className="invoiceForm__form-container_items">
-            <div>
+
+          <ul className="invoiceForm__form-container_items">
+            {items.map((item) => (
+              <>
+                <li>
+                  <label htmlFor="ItemName">Item Name</label>
+                  <input
+                    type="text"
+                    id="itemName"
+                    placeholder="Banner Design etc."
+                  />
+                  <div className="invoiceForm__form-container_item">
+                    <div>
+                      <label htmlFor="quantity">Qty.</label>
+                      <input id="quantity" placeholder="1.."></input>
+                    </div>
+                    <div>
+                      <label htmlFor="price">Price</label>
+                      <input type="number" placeholder="156" />
+                    </div>
+                    <div>
+                      <label>Value</label>
+                      <input value="156" disabled />
+                    </div>
+                  </div>
+                </li>
+              </>
+            ))}
+            {/* <div>
               <label htmlFor="quantity">Qty.</label>
               <input id="quantity" placeholder="1.."></input>
             </div>
@@ -67,9 +98,16 @@ const InvoiceForm = () => {
             <div>
               <label>Value</label>
               <input value="156" disabled />
-            </div>
-          </div>
-          <button className="invoiceForm__form-button">+Add New Item</button>
+            </div> */}
+          </ul>
+
+          <button
+            type="button"
+            onClick={addNewItemField}
+            className="invoiceForm__form-button"
+          >
+            +Add New Item
+          </button>
         </div>
         <div className="invoiceForm__form-button_container">
           <button className="invoiceForm__form-button">Discard</button>

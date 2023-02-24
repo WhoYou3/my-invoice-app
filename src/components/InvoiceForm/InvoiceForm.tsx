@@ -75,7 +75,7 @@ const InvoiceForm: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const handleSaveInvoice = async () => {
+  const handleSaveInvoice = async (status: "PENDING" | "DRAFT") => {
     dispatch(closeAddForm());
     await addDoc(invoicesCollectionRef, {
       name: formData.name,
@@ -88,6 +88,7 @@ const InvoiceForm: React.FC = () => {
       projectDescription: formData.projectDescription,
       paymentTerm: formData.paymentTerm,
       cost: formData.cost,
+      status: status,
     });
   };
 
@@ -279,12 +280,12 @@ const InvoiceForm: React.FC = () => {
           <button
             style={{ background: "#373B53", color: "white" }}
             className="invoiceForm__form-button"
+            onClick={(e) => handleSaveInvoice("DRAFT")}
           >
             Save as Draft
           </button>
           <button
-            type="button"
-            onClick={handleSaveInvoice}
+            onClick={(e) => handleSaveInvoice("PENDING")}
             style={{ background: "#7C5DFA", color: "white" }}
             className="invoiceForm__form-button"
           >

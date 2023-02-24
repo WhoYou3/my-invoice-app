@@ -9,4 +9,5 @@ export interface InvoiceType {
   postCode: string;
   street: string;
   cost: number;
+  status: "PENDING" | "DRAFT" | "PAID";
 }

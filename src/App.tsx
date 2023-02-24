@@ -7,8 +7,6 @@ const App: React.FC = () => {
   const isDarkMode = useAppSelector((state) => state.toggle.isDark);
   const isOpenForm = useAppSelector((state) => state.isAdding.isAdding);
 
-  console.log("testujemy");
-
   return (
     <div className={`app-container ${isDarkMode ? "dark" : "light"} `}>
       <Navbar />

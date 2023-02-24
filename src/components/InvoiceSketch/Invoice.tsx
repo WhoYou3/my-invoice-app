@@ -7,6 +7,8 @@ interface Props {
 }
 
 const Invoice = ({ invoice }: Props) => {
+  const invoiceStatusClass = invoice.status;
+  console.log(invoiceStatusClass);
   return (
     <div className="invoice__invoice">
       <div className="invoice__invoice-header">
@@ -24,10 +26,12 @@ const Invoice = ({ invoice }: Props) => {
             <span>{`$${invoice.cost}`}</span>
           </p>
         </div>
-        <div className="invoice__invoice-container_status">
+        <div
+          className={`invoice__invoice-container_status ${invoiceStatusClass!.toLowerCase()}`}
+        >
           <div />
           <p>
-            <span>PAID</span>
+            <span>{invoice.status}</span>
           </p>
         </div>
       </div>

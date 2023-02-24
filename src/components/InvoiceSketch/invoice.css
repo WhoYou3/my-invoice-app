@@ -45,9 +45,37 @@
   gap: 10px;
   width: 100px;
   border-radius: 6px;
-  background: var(--paid-color-background);
 
   height: 40px;
+}
+
+.invoice__invoice-container_status.pending {
+  background-color: var(--pending-background-color);
+}
+
+.invoice__invoice-container_status.pending p span {
+  color: var(--pending-text-color);
+}
+.invoice__invoice-container_status.pending div {
+  background-color: var(--pending-text-color);
+}
+
+.invoice__invoice-container_status.paid,
+.invoice__invoice-container_status.paid div,
+.invoice__invoice-container_status.paid p span {
+  background-color: var(--pending-background-color);
+  color: var(--paid-color);
+}
+
+.invoice__invoice-container_status.draft {
+  background-color: var(--draft-color-background);
+}
+.invoice__invoice-container_status.draft p span {
+  color: var(--draft-color);
+}
+
+.invoice__invoice-container_status.draft div {
+  background-color: var(--draft-color);
 }
 
 .invoice__invoice-container_status div {

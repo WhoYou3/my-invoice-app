@@ -7,10 +7,13 @@
   --sidebar-color: #1e2139;
   --dark-theme-background-color: #141625;
   --light-theme-background-color: #f8f8fb;
-  --pending-text-color: #0c0e16;
-  --pending-backround-color: #ff8f00;
+  --pending-text-color: #ff8f00;
+  --pending-background-color: rgb(255, 143, 0, 0.2);
   --paid-color: #33d69f;
   --paid-color-background: rgba(51, 214, 159, 0.06);
+  --draft-color-background: rgba(223, 227, 250, 0.06);
+  --draft-color: black;
+
   --padding: 2rem, 1rem;
   --margin: 1.5rem;
 }

@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase-config";
 import { InvoiceType } from "./InvoiceType";
-import { collection, getDocs, CollectionReference } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  getDocs,
+  CollectionReference,
+  QuerySnapshot,
+} from "firebase/firestore";
+
 import { DocumentData } from "firebase/firestore";
 import { Invoice, InvoiceNavigation } from "../../components/index";
 import "./Invoices.css";
@@ -14,19 +21,38 @@ const Invoices = () => {
     "Invoices"
   );
 
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     const data = await getDocs(invoicesCollectionRef);
+  //     const invoicesArray = data.docs.map((singleInvoice) => ({
+  //       ...singleInvoice.data(),
+  //       id: singleInvoice.id,
+  //     })) as InvoiceType[];
+  //     setInvoices(invoicesArray);
+  //   };
+
+  //   getUsers();
+  // }, []);
+
   useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(invoicesCollectionRef);
-      const invoicesArray = data.docs.map((singleInvoice) => ({
-        ...singleInvoice.data(),
-        id: singleInvoice.id,
-      })) as InvoiceType[];
-      setInvoices(invoicesArray);
+    const invoicesCollectionRef = collection(db, "Invoices");
+
+    const unsubscribe = onSnapshot(
+      invoicesCollectionRef,
+      (querySnapshot: QuerySnapshot) => {
+        const invoicesArray = querySnapshot.docs.map((singleInvoice) => ({
+          ...singleInvoice.data(),
+          id: singleInvoice.id,
+        })) as InvoiceType[];
+        setInvoices(invoicesArray);
+      }
+    );
+
+    return () => {
+      unsubscribe();
     };
-
-    getUsers();
-  }, [invoicesCollectionRef]);
-
+  }, []);
+  console.log(invoices);
   const invoicesLength = invoices.length;
 
   return (

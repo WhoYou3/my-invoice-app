@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux/es/exports";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { TypedUseSelectorHook } from "react-redux/es/types";
 import { ToggleModeSlice } from "./features/toggleModeleSlice";
-import { IsAddingNewInvoiceSlice } from "./features/isAddingNewInvoice";
+import { IsAddingNewInvoiceSlice } from "./features/isAddingNewInvoiceSlice";
 
 export const store = configureStore({
   reducer: {

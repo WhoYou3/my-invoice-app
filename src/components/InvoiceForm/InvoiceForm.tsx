@@ -4,22 +4,64 @@ import { iconDelete } from "../../assets";
 
 import "./invoiceForm.css";
 
-interface element {
-  id: number;
-  element: string;
+interface Item {
+  itemName: string;
+  quantity: number;
+  price: number;
+}
+
+interface FormValues {
+  name: string;
+  email: string;
+  street: string;
+  city: string;
+  postCode: string;
+  date: string;
+  country: string;
+  projectDescription: string;
+  invoiceItems: Item[];
 }
 
 const InvoiceForm: React.FC = () => {
-  const [items, setItems] = useState<element[]>([]);
-  const addNewItemField = () => {
-    const newId = items.length + 1;
-    setItems((prevItems) => [...prevItems, { id: newId, element: "element" }]);
+  const [items, setItems] = useState<Item[]>([]);
+  const [formData, setFormData] = useState<FormValues>({
+    name: "",
+    email: "",
+    city: "",
+    street: "",
+    date: "",
+    postCode: "",
+    country: "",
+    projectDescription: "",
+    invoiceItems: items,
+  });
+
+  const handleAddItemsField = () => {
+    const itemsCopy = [...items];
+    itemsCopy.push({ itemName: "", quantity: 0, price: 0 });
+    setItems(itemsCopy);
   };
-  const deleteItem = (id: number): void => {
-    const filtredItems = items.filter((item) => item.id !== id);
-    setItems(filtredItems);
+
+  const handleItemsInputsValues = (
+    index: number,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const itemsCopy = [...items];
+    itemsCopy[index][event.target.name] = event.target.value;
+    setItems(itemsCopy);
   };
-  console.log(items);
+
+  const handleDeleteItemField = (index: number): void => {
+    const itemsCopy = [...items];
+    itemsCopy.splice(index, 1);
+    setItems(itemsCopy);
+  };
+
+  const handleSaveInvoice = () => {
+    setFormData({ ...formData, invoiceItems: items });
+    console.log(123);
+  };
+  console.log(formData);
 
   return (
     <>
@@ -44,19 +86,43 @@ const InvoiceForm: React.FC = () => {
             <span>Bill To</span>
           </p>
           <label htmlFor="name">Client's Name</label>
-          <input id="name" placeholder="Alex Grim"></input>
+          <input
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            id="name"
+            placeholder="Alex Grim"
+          ></input>
           <label htmlFor="street">Street Addres</label>
-          <input id="street" placeholder="Downtown 18"></input>
+          <input
+            onChange={(e) =>
+              setFormData({ ...formData, street: e.target.value })
+            }
+            id="street"
+            placeholder="Downtown 18"
+          ></input>
 
           <label htmlFor="city">City</label>
-          <input id="city" placeholder="Manchester"></input>
+          <input
+            onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+            id="city"
+            placeholder="Manchester"
+          ></input>
           <label htmlFor="postcode">Post Code</label>
           <input id="postcode" placeholder="E1 E25"></input>
 
           <label htmlFor="counry">Country</label>
-          <input id="country" placeholder="United Kingdom"></input>
+          <input
+            onChange={(e) =>
+              setFormData({ ...formData, country: e.target.value })
+            }
+            id="country"
+            placeholder="United Kingdom"
+          ></input>
           <label htmlFor="invoiceDate">Invoice date</label>
-          <input id="invoiceDate" type="date"></input>
+          <input
+            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+            id="invoiceDate"
+            type="date"
+          ></input>
           <label htmlFor="PaymentTerms">Payment Terms</label>
           <select id="PaymentTerms">
             <option value="">Choose Payment Terms</option>
@@ -65,7 +131,13 @@ const InvoiceForm: React.FC = () => {
             <option value="option3">7 days</option>
           </select>
           <label htmlFor="ProjectDescription">Project / Description</label>
-          <input id="ProjectDescription" placeholder="Graphic Design"></input>
+          <input
+            onChange={(e) =>
+              setFormData({ ...formData, projectDescription: e.target.value })
+            }
+            id="ProjectDescription"
+            placeholder="Graphic Design"
+          ></input>
         </div>
         <div className="invoiceForm__form-container">
           <p>
@@ -73,11 +145,13 @@ const InvoiceForm: React.FC = () => {
           </p>
 
           <ul className="invoiceForm__form-container_items">
-            {items.map((item) => (
+            {items.map((item, index) => (
               <>
-                <li key={item.id}>
+                <li key={index}>
                   <label htmlFor="ItemName">Item Name</label>
                   <input
+                    onChange={(event) => handleItemsInputsValues(index, event)}
+                    name="itemName"
                     type="text"
                     id="itemName"
                     placeholder="Banner Design etc."
@@ -85,11 +159,15 @@ const InvoiceForm: React.FC = () => {
                   <div className="invoiceForm__form-container_item">
                     <div>
                       <label htmlFor="quantity">Qty.</label>
-                      <input id="quantity" placeholder="1.."></input>
+                      <input
+                        name="quantity"
+                        id="quantity"
+                        placeholder="1.."
+                      ></input>
                     </div>
                     <div>
                       <label htmlFor="price">Price</label>
-                      <input type="number" placeholder="156" />
+                      <input name="price" type="number" placeholder="156" />
                     </div>
                     <div>
                       <label>Value</label>
@@ -97,7 +175,7 @@ const InvoiceForm: React.FC = () => {
                     </div>
                     <div className="invoiceForm__form-img">
                       <img
-                        onClick={() => deleteItem(item.id)}
+                        onClick={() => handleDeleteItemField(index)}
                         src={iconDelete}
                         alt="delete-icon"
                       ></img>
@@ -106,23 +184,11 @@ const InvoiceForm: React.FC = () => {
                 </li>
               </>
             ))}
-            {/* <div>
-              <label htmlFor="quantity">Qty.</label>
-              <input id="quantity" placeholder="1.."></input>
-            </div>
-            <div>
-              <label htmlFor="price">Price</label>
-              <input type="number" placeholder="156" />
-            </div>
-            <div>
-              <label>Value</label>
-              <input value="156" disabled />
-            </div> */}
           </ul>
 
           <button
             type="button"
-            onClick={addNewItemField}
+            onClick={handleAddItemsField}
             className="invoiceForm__form-button"
           >
             +Add New Item
@@ -137,6 +203,8 @@ const InvoiceForm: React.FC = () => {
             Save as Draft
           </button>
           <button
+            type="button"
+            onClick={handleSaveInvoice}
             style={{ background: "#7C5DFA", color: "white" }}
             className="invoiceForm__form-button"
           >

@@ -25,11 +25,13 @@ const Invoices = () => {
     };
 
     getUsers();
-  }, []);
+  }, [invoicesCollectionRef]);
+
+  const invoicesLength = invoices.length;
 
   return (
     <div className="invoices__invoices-container">
-      <InvoiceNavigation />
+      <InvoiceNavigation length={invoicesLength} />
       {invoices.map((invoice) => (
         <Invoice key={invoice.id} invoice={invoice} />
       ))}

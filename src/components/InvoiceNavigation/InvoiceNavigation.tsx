@@ -3,7 +3,11 @@ import { openAddForm } from "../../store/features/isAddingNewInvoiceSlice";
 import { iconPlus, iconArrowDown } from "../../assets";
 import "./invoiceNavigation.css";
 
-const InvoiceNavigation = () => {
+interface props {
+  length: number;
+}
+
+const InvoiceNavigation: React.FC<props> = ({ length }) => {
   const dispatch = useAppDispatch();
 
   const openInvoiceForm = () => {
@@ -14,7 +18,7 @@ const InvoiceNavigation = () => {
     <div className="invoices__invoice-navigation">
       <div className="invoices__invoice-navigation_title">
         <h3>Invoices</h3>
-        <p>7 invoices</p>
+        <p>{length} invoices</p>
       </div>
       <div className="invoices__invoice-navigation_container">
         <div className="invoices__invoice-navigation_filter">

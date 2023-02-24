@@ -13,13 +13,15 @@ const Invoice = ({ invoice }: Props) => {
         <p>
           <span>#{invoice.id.slice(0, 6).toUpperCase()}</span>
         </p>
-        <p>{invoice.clientName}</p>
+        <p>
+          <span>{invoice.name}</span>
+        </p>
       </div>
       <div className="invoice__invoice-container">
         <div className="invoice__invoice-container_data">
-          <p>Due 19 Aug 2021</p>
+          <p>{invoice.date}</p>
           <p>
-            <span>$1,800.90</span>
+            <span>{`$${invoice.cost}`}</span>
           </p>
         </div>
         <div className="invoice__invoice-container_status">

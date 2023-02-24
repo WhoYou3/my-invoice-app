@@ -1,16 +1,12 @@
 export interface InvoiceType {
   id: string;
-  clientName: string;
-  clientEmail: string;
+  name: string;
+  email: string;
   date: string;
   paymentTerms: string;
-  project: string;
+  projectDescription: string;
   projectDetails: string;
-  clientAddres: Addres;
-}
-
-interface Addres {
-  city: string;
-  country: string;
   postCode: string;
+  street: string;
+  cost: number;
 }

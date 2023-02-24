@@ -1,8 +1,13 @@
 import React from "react";
 import { useState } from "react";
+import { useAppDispatch } from "../../store/store";
+import { db } from "../../firebase/firebase-config";
+import { addDoc, collection, CollectionReference } from "firebase/firestore";
+import { DocumentData } from "firebase/firestore";
 import { iconDelete } from "../../assets";
 
 import "./invoiceForm.css";
+import { closeAddForm } from "../../store/features/isAddingNewInvoiceSlice";
 
 interface Item {
   [key: string]: string | number;
@@ -22,6 +27,7 @@ export interface FormValues {
   projectDescription: string;
   paymentTerm: string;
   invoiceItems: Item[];
+  cost: number;
 }
 
 const InvoiceForm: React.FC = () => {
@@ -36,8 +42,14 @@ const InvoiceForm: React.FC = () => {
     country: "",
     projectDescription: "",
     paymentTerm: "",
+    cost: 0,
     invoiceItems: items,
   });
+
+  const invoicesCollectionRef: CollectionReference<DocumentData> = collection(
+    db,
+    "Invoices"
+  );
 
   const handleAddItemsField = () => {
     const itemsCopy: Item[] = [...items];
@@ -59,14 +71,32 @@ const InvoiceForm: React.FC = () => {
     itemsCopy.splice(index, 1);
     setItems(itemsCopy);
   };
+  console.log(formData);
+
+  const dispatch = useAppDispatch();
 
   const handleSaveInvoice = async () => {
-    setFormData({ ...formData, invoiceItems: items });
+    dispatch(closeAddForm());
+    await addDoc(invoicesCollectionRef, {
+      name: formData.name,
+      email: formData.email,
+      city: formData.city,
+      street: formData.street,
+      date: formData.date,
+      postCode: formData.postCode,
+      country: formData.country,
+      projectDescription: formData.projectDescription,
+      paymentTerm: formData.paymentTerm,
+      cost: formData.cost,
+    });
   };
-  console.log(formData);
+
+  let costItems: number = 0;
 
   const renderItemsList = () => {
     return items.map((item, index) => {
+      costItems += item.quantity * item.price;
+      formData.cost = costItems;
       return (
         <li key={index}>
           <label htmlFor={`itemName${index}`}>Item Name</label>
@@ -143,6 +173,14 @@ const InvoiceForm: React.FC = () => {
             id="name"
             placeholder="Alex Grim"
           ></input>
+          <label htmlFor="email">Client's Email</label>
+          <input
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            id="email"
+            placeholder="AlexGrim@gmail.com"
+          ></input>
           <label htmlFor="street">Street Addres</label>
           <input
             onChange={(e) =>
@@ -159,7 +197,13 @@ const InvoiceForm: React.FC = () => {
             placeholder="Manchester"
           ></input>
           <label htmlFor="postcode">Post Code</label>
-          <input id="postcode" placeholder="E1 E25"></input>
+          <input
+            onChange={(e) =>
+              setFormData({ ...formData, postCode: e.target.value })
+            }
+            id="postcode"
+            placeholder="E1 E25"
+          ></input>
 
           <label htmlFor="counry">Country</label>
           <input
@@ -195,9 +239,9 @@ const InvoiceForm: React.FC = () => {
             id="PaymentTerms"
           >
             <option value="">Choose Payment Terms</option>
-            <option value="option1">30 days</option>
-            <option value="option2">14 days</option>
-            <option value="option3">7 days</option>
+            <option value="30 days">30 days</option>
+            <option value="14 days">14 days</option>
+            <option value="7 days">7 days</option>
           </select>
           <label htmlFor="ProjectDescription">Project / Description</label>
           <input
@@ -226,7 +270,12 @@ const InvoiceForm: React.FC = () => {
           </button>
         </div>
         <div className="invoiceForm__form-button_container">
-          <button className="invoiceForm__form-button">Discard</button>
+          <button
+            onClick={() => dispatch(closeAddForm())}
+            className="invoiceForm__form-button"
+          >
+            Discard
+          </button>
           <button
             style={{ background: "#373B53", color: "white" }}
             className="invoiceForm__form-button"

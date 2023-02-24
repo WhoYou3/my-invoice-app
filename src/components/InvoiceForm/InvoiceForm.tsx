@@ -5,12 +5,13 @@ import { iconDelete } from "../../assets";
 import "./invoiceForm.css";
 
 interface Item {
+  [key: string]: string | number;
   itemName: string;
   quantity: number;
   price: number;
 }
 
-interface FormValues {
+export interface FormValues {
   name: string;
   email: string;
   street: string;
@@ -19,6 +20,7 @@ interface FormValues {
   date: string;
   country: string;
   projectDescription: string;
+  paymentTerm: string;
   invoiceItems: Item[];
 }
 
@@ -33,11 +35,12 @@ const InvoiceForm: React.FC = () => {
     postCode: "",
     country: "",
     projectDescription: "",
+    paymentTerm: "",
     invoiceItems: items,
   });
 
   const handleAddItemsField = () => {
-    const itemsCopy = [...items];
+    const itemsCopy: Item[] = [...items];
     itemsCopy.push({ itemName: "", quantity: 0, price: 0 });
     setItems(itemsCopy);
   };
@@ -57,11 +60,60 @@ const InvoiceForm: React.FC = () => {
     setItems(itemsCopy);
   };
 
-  const handleSaveInvoice = () => {
+  const handleSaveInvoice = async () => {
     setFormData({ ...formData, invoiceItems: items });
-    console.log(123);
   };
   console.log(formData);
+
+  const renderItemsList = () => {
+    return items.map((item, index) => {
+      return (
+        <li key={index}>
+          <label htmlFor={`itemName${index}`}>Item Name</label>
+          <input
+            onChange={(event) => handleItemsInputsValues(index, event)}
+            name="itemName"
+            type="text"
+            id={`itemName${index}`}
+            placeholder="Banner Design etc."
+          />
+          <div className="invoiceForm__form-container_item">
+            <div>
+              <label htmlFor={`quantity${index}`}>Qty.</label>
+              <input
+                onChange={(event) => handleItemsInputsValues(index, event)}
+                type="number"
+                name="quantity"
+                id={`quantity${index}`}
+                placeholder="1.."
+              ></input>
+            </div>
+            <div>
+              <label htmlFor={`price${index}`}>Price</label>
+              <input
+                onChange={(event) => handleItemsInputsValues(index, event)}
+                name="price"
+                type="number"
+                placeholder="156"
+                id={`price${index}`}
+              />
+            </div>
+            <div>
+              <label>Value</label>
+              <input value={item.price * item.quantity} disabled />
+            </div>
+            <div className="invoiceForm__form-img">
+              <img
+                onClick={() => handleDeleteItemField(index)}
+                src={iconDelete}
+                alt="delete-icon"
+              ></img>
+            </div>
+          </div>
+        </li>
+      );
+    });
+  };
 
   return (
     <>
@@ -78,7 +130,7 @@ const InvoiceForm: React.FC = () => {
           <label htmlFor="postcode">Post Code</label>
           <input id="postcode" value="E1 3EZ" disabled></input>
 
-          <label htmlFor="counry">Country</label>
+          <label htmlFor="country">Country</label>
           <input id="country" disabled value="United Kingdom"></input>
         </div>
         <div className="invoiceForm__form-container">
@@ -119,12 +171,29 @@ const InvoiceForm: React.FC = () => {
           ></input>
           <label htmlFor="invoiceDate">Invoice date</label>
           <input
-            onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+            onChange={(e) => {
+              const date = new Date(e.target.value);
+              const formattedDate = date.toLocaleDateString("en-US", {
+                weekday: "short",
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              });
+              setFormData({
+                ...formData,
+                date: formattedDate.replaceAll(/,/g, ""),
+              });
+            }}
             id="invoiceDate"
             type="date"
           ></input>
           <label htmlFor="PaymentTerms">Payment Terms</label>
-          <select id="PaymentTerms">
+          <select
+            onChange={(e) =>
+              setFormData({ ...formData, paymentTerm: e.target.value })
+            }
+            id="PaymentTerms"
+          >
             <option value="">Choose Payment Terms</option>
             <option value="option1">30 days</option>
             <option value="option2">14 days</option>
@@ -145,45 +214,7 @@ const InvoiceForm: React.FC = () => {
           </p>
 
           <ul className="invoiceForm__form-container_items">
-            {items.map((item, index) => (
-              <>
-                <li key={index}>
-                  <label htmlFor="ItemName">Item Name</label>
-                  <input
-                    onChange={(event) => handleItemsInputsValues(index, event)}
-                    name="itemName"
-                    type="text"
-                    id="itemName"
-                    placeholder="Banner Design etc."
-                  />
-                  <div className="invoiceForm__form-container_item">
-                    <div>
-                      <label htmlFor="quantity">Qty.</label>
-                      <input
-                        name="quantity"
-                        id="quantity"
-                        placeholder="1.."
-                      ></input>
-                    </div>
-                    <div>
-                      <label htmlFor="price">Price</label>
-                      <input name="price" type="number" placeholder="156" />
-                    </div>
-                    <div>
-                      <label>Value</label>
-                      <input value="156" disabled />
-                    </div>
-                    <div className="invoiceForm__form-img">
-                      <img
-                        onClick={() => handleDeleteItemField(index)}
-                        src={iconDelete}
-                        alt="delete-icon"
-                      ></img>
-                    </div>
-                  </div>
-                </li>
-              </>
-            ))}
+            {renderItemsList()}
           </ul>
 
           <button

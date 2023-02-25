@@ -23,7 +23,7 @@ const Invoice = ({ invoice }: Props) => {
         <div className="invoice__invoice-container_data">
           <p>{invoice.date}</p>
           <p>
-            <span>{`$${invoice.cost}`}</span>
+            <span>{`$${invoice.cost.toFixed(2)}`}</span>
           </p>
         </div>
         <div

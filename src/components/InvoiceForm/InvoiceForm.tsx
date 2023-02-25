@@ -71,7 +71,17 @@ const InvoiceForm: React.FC = () => {
     itemsCopy.splice(index, 1);
     setItems(itemsCopy);
   };
-  console.log(formData);
+
+  const validForm = (): boolean => {
+    let isEmptyField = Object.values(formData).every((prop) => prop !== "");
+    if (Object.values(formData).every((prop) => prop === "")) {
+      isEmptyField = false;
+    }
+
+    return isEmptyField;
+  };
+
+  const isValidForm = validForm();
 
   const dispatch = useAppDispatch();
 
@@ -131,7 +141,7 @@ const InvoiceForm: React.FC = () => {
             </div>
             <div>
               <label>Value</label>
-              <input value={item.price * item.quantity} disabled />
+              <input value={(item.price * item.quantity).toFixed(2)} disabled />
             </div>
             <div className="invoiceForm__form-img">
               <img
@@ -280,14 +290,16 @@ const InvoiceForm: React.FC = () => {
           <button
             style={{ background: "#373B53", color: "white" }}
             className="invoiceForm__form-button"
-            onClick={(e) => handleSaveInvoice("DRAFT")}
+            onClick={() => handleSaveInvoice("DRAFT")}
+            disabled={!isValidForm}
           >
             Save as Draft
           </button>
           <button
-            onClick={(e) => handleSaveInvoice("PENDING")}
+            onClick={() => handleSaveInvoice("PENDING")}
             style={{ background: "#7C5DFA", color: "white" }}
             className="invoiceForm__form-button"
+            disabled={!isValidForm}
           >
             Save & Send
           </button>

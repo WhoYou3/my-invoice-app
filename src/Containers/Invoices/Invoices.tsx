@@ -26,7 +26,7 @@ const Invoices = () => {
       unsubscribe();
     };
   }, []);
-  console.log(invoices);
+
   const invoicesLength = invoices.length;
 
   return (

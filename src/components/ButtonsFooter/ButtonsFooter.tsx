@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch } from "../../store/store";
-import { closeAddForm } from "../../store/features/isAddingNewInvoiceSlice";
+import { closeAddForm } from "../../store/features/IsAddingUpdatingInvoiceSlice";
 import "./buttonsFooter.css";
 
 interface props {

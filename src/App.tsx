@@ -1,22 +1,26 @@
 import { Navbar, Invoices, InvoiceMaker } from "./Containers";
 import { useAppSelector } from "./store/store";
-import { motion } from "framer-motion";
+
 import "./App.css";
-import { InvoiceDetail } from "./components";
+import InvoiceEditor from "./Containers/InvoiceEditor/InvoiceEditor";
 
 const App: React.FC = () => {
   const isDarkMode = useAppSelector((state) => state.toggle.isDark);
-  const isOpenForm = useAppSelector((state) => state.isAdding.isAdding);
-  const isDetailCard = useAppSelector(
-    (state) => state.isOpenDetail.isShowDetail
+  const isAddForm = useAppSelector(
+    (state) => state.isAddingOrUpdating.isAdding
   );
+  const isEditForm = useAppSelector(
+    (state) => state.isAddingOrUpdating.isEditing
+  );
+  console.log(isEditForm);
 
   return (
     <div className={`app-container ${isDarkMode ? "dark" : "light"} `}>
       <Navbar />
       <Invoices />
 
-      {isOpenForm ? <InvoiceMaker /> : null}
+      {isAddForm ? <InvoiceMaker /> : null}
+      {isEditForm ? <InvoiceEditor /> : null}
     </div>
   );
 };

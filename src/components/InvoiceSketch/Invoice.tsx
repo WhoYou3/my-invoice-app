@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { InvoiceType } from "../../Containers/Invoices/InvoiceType";
 import { openDetail } from "../../store/features/isShowDetailSlice";
@@ -10,7 +10,7 @@ interface Props {
 }
 
 const Invoice = ({ invoice }: Props) => {
-  // const [isOpenDetail, setIsOpenDetail] = useState(false);
+  const [isDetailPage, setIsDetailPage] = React.useState<boolean>(false);
   const isOpenDetail = useAppSelector(
     (state) => state.isOpenDetail.isShowDetail
   );
@@ -18,11 +18,18 @@ const Invoice = ({ invoice }: Props) => {
   const invoiceStatusClass = invoice.status;
   const dispatch = useAppDispatch();
 
+  const resetState = () => {
+    setIsDetailPage(false);
+  };
+
   return (
     <>
       <div
         style={{ display: isOpenDetail ? "none" : "" }}
-        onClick={() => dispatch(openDetail())}
+        onClick={() => {
+          dispatch(openDetail());
+          setIsDetailPage(true);
+        }}
         className="invoice__invoice"
       >
         <div className="invoice__invoice-header">
@@ -50,7 +57,9 @@ const Invoice = ({ invoice }: Props) => {
           </div>
         </div>
       </div>
-      {isOpenDetail ? <InvoiceDetail /> : null}
+      {isDetailPage && isOpenDetail ? (
+        <InvoiceDetail onResetState={resetState} details={invoice} />
+      ) : null}
     </>
   );
 };

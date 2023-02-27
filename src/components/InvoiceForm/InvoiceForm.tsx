@@ -7,10 +7,10 @@ import { DocumentData } from "firebase/firestore";
 import { iconDelete } from "../../assets";
 
 import "./invoiceForm.css";
-import { closeAddForm } from "../../store/features/isAddingNewInvoiceSlice";
+import { closeAddForm } from "../../store/features/IsAddingUpdatingInvoiceSlice";
 import ButtonsFooter from "../ButtonsFooter/ButtonsFooter";
 
-interface Item {
+export interface Item {
   [key: string]: string | number;
   itemName: string;
   quantity: number;
@@ -99,6 +99,7 @@ const InvoiceForm: React.FC = () => {
       projectDescription: formData.projectDescription,
       paymentTerm: formData.paymentTerm,
       cost: formData.cost,
+      invoiceItems: items,
       status: status,
     });
   };
@@ -251,9 +252,9 @@ const InvoiceForm: React.FC = () => {
             id="PaymentTerms"
           >
             <option value="">Choose Payment Terms</option>
-            <option value="30 days">30 days</option>
-            <option value="14 days">14 days</option>
-            <option value="7 days">7 days</option>
+            <option value="30">30 days</option>
+            <option value="14">14 days</option>
+            <option value="7">7 days</option>
           </select>
           <label htmlFor="ProjectDescription">Project / Description</label>
           <input

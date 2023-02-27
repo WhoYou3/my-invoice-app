@@ -1,5 +1,6 @@
 .invoices__invoices-container {
   margin: 2rem 1rem;
+  overflow: auto;
 }
 
 @media screen and (min-width: 600px) {

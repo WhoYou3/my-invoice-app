@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux/es/exports";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { TypedUseSelectorHook } from "react-redux/es/types";
 import { ToggleModeSlice } from "./features/toggleModeleSlice";
-import { IsAddingNewInvoiceSlice } from "./features/isAddingNewInvoiceSlice";
+import { IsAddingUpdatingInvoiceSlice } from "./features/IsAddingUpdatingInvoiceSlice";
 import { IsOpeningDetailCard } from "./features/isShowDetailSlice";
 
 export const store = configureStore({
   reducer: {
     toggle: ToggleModeSlice.reducer,
-    isAdding: IsAddingNewInvoiceSlice.reducer,
+    isAddingOrUpdating: IsAddingUpdatingInvoiceSlice.reducer,
     isOpenDetail: IsOpeningDetailCard.reducer,
   },
 });

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import { openAddForm } from "../../store/features/isAddingNewInvoiceSlice";
+import { openAddForm } from "../../store/features/IsAddingUpdatingInvoiceSlice";
 import { iconPlus, iconArrowDown } from "../../assets";
 import "./invoiceNavigation.css";
 

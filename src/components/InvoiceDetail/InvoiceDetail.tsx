@@ -1,25 +1,48 @@
 import React from "react";
 import BackLink from "../Backer/BackLink";
+import { useAppDispatch } from "../../store/store";
+import { InvoiceType } from "../../Containers/Invoices/InvoiceType";
+
+import { openEditForm } from "../../store/features/IsAddingUpdatingInvoiceSlice";
 import "./InvoiceDetail.css";
 
-const InvoiceDetail = () => {
+interface Props {
+  details: InvoiceType;
+  onResetState: Function;
+}
+
+const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
+  const dispatch = useAppDispatch();
+
+  const date = new Date(details.date);
+
+  date.setDate(date.getDate() + Number(details.paymentTerm));
+
+  const payDay = date.toLocaleDateString("en-US", {
+    weekday: "short",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
   return (
     <>
       <div className="invoiceDetail">
-        <BackLink />
+        <BackLink onResetState={onResetState} />
         <div className="invoiceDetail__status">
           <p>Status</p>
+
           <p>
-            <span>pending</span>
+            <span>{details.status}</span>
           </p>
         </div>
         <div className="invoiceDetail__container">
           <div className="invoiceDetail__container-header">
             <div className="invoiceDetail__container-header_title">
               <p>
-                <span>#XM9141</span>
+                <span>#{details.id.slice(0, 6).toUpperCase()}</span>
               </p>
-              <p>Graphic Design</p>
+              <p>{details.projectDescription}</p>
             </div>
             <div className="invoiceDetail__container-header_addres">
               <p>19 Union Terrace</p>
@@ -33,13 +56,13 @@ const InvoiceDetail = () => {
               <div>
                 <p>Invoice Date</p>
                 <p>
-                  <span>21 Aug 2021</span>
+                  <span>{details.date}</span>
                 </p>
               </div>
               <div>
                 <p>Payment Due</p>
                 <p>
-                  <span>20 Sep 2021</span>
+                  <span>{payDay.replaceAll(/,/g, "")}</span>
                 </p>
               </div>
             </div>
@@ -49,45 +72,69 @@ const InvoiceDetail = () => {
               </div>
               <div>
                 <p>
-                  <span>Alex Grim</span>
+                  <span>{details.name}</span>
                 </p>
               </div>
               <div>
-                <p>84 Church Way</p>
-                <p>Bradford</p>
-                <p>BDI 99B</p>
-                <p>United Kingdom</p>
+                <p>{details.street}</p>
+                <p>{details.city}</p>
+                <p>{details.postCode}</p>
+                <p>{details.country}</p>
               </div>
             </div>
             <div className="invoiceDetail__container-email">
               <p>Sent to</p>
               <p>
-                <span>alexgrim@mail.com</span>
+                <span>{details.email}</span>
               </p>
             </div>
           </div>
           <div className="invoiceDetail__conteiner-summary">
             <div className="invoiceDetail__container-summary_itemsbox">
-              <p>
-                <span>Banner Design</span>
-              </p>
               <div>
-                <p>1 x $300.00</p>
                 <p>
-                  <span>$300</span>
+                  <span>Item Name</span>
+                </p>
+                <p>
+                  <span>Quantity</span>
+                </p>
+                <p>
+                  <span>Prize</span>
+                </p>
+                <p>
+                  <span>Total</span>
                 </p>
               </div>
+              {details.invoiceItems.map((invoice) => (
+                <div key={invoice.itemName}>
+                  <p>
+                    <span>{invoice.itemName}</span>
+                  </p>
+                  <p>{`${invoice.quantity}x`}</p>
+                  <p>{invoice.price}</p>
+                  <p>
+                    <span>${`${invoice.quantity * invoice.price}`}</span>
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
           <div className="invoiceDetail__container-summary_result">
             <p>Amout due</p>
             <p>
-              <span>$600</span>
+              <span>${details.cost}</span>
             </p>
           </div>
         </div>
         <div className="invoiceDetail__container-buttons">
-          <button style={{ width: "60px", background: "#252945" }}>Edit</button>
+          <button
+            onClick={() => {
+              dispatch(openEditForm());
+            }}
+            style={{ width: "60px", background: "#252945" }}
+          >
+            Edit
+          </button>
           <button style={{ width: "79px", background: "#EC5757" }}>
             Delete
           </button>

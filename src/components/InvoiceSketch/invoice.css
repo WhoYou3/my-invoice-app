@@ -7,7 +7,6 @@
   flex-direction: column;
   cursor: pointer;
   position: relative;
-  border: 1px red solid;
 }
 
 .invoice__invoice:hover {

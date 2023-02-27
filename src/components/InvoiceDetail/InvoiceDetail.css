@@ -6,12 +6,13 @@
   position: absolute;
   width: 100%;
   left: 0;
-  top: -90px;
+  top: 80px;
   padding-top: 1rem;
   background-color: var(--dark-theme-background-color);
   z-index: 12;
   display: flex;
   flex-direction: column;
+  animation: showDetail 1s ease-in-out;
 }
 
 .light .invoiceDetail {
@@ -192,10 +193,25 @@
 @media screen and (min-width: 1024px) {
   .invoiceDetail {
     overflow-y: hidden;
+    width: 50%;
+    left: 55%;
+    transform: translate(-50%);
+
+    overflow-y: auto;
   }
   .invoiceDetail__container-description {
     padding: 2rem 3rem;
 
     max-width: 600px;
+  }
+}
+
+@keyframes showDetail {
+  from {
+    top: -1000px;
+  }
+
+  to {
+    top: 80px;
   }
 }

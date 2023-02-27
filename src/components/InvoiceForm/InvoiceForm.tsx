@@ -8,6 +8,7 @@ import { iconDelete } from "../../assets";
 
 import "./invoiceForm.css";
 import { closeAddForm } from "../../store/features/isAddingNewInvoiceSlice";
+import ButtonsFooter from "../ButtonsFooter/ButtonsFooter";
 
 interface Item {
   [key: string]: string | number;
@@ -280,7 +281,7 @@ const InvoiceForm: React.FC = () => {
             +Add New Item
           </button>
         </div>
-        <div className="invoiceForm__form-button_container">
+        {/* <div className="invoiceForm__form-button_container">
           <button
             onClick={() => dispatch(closeAddForm())}
             className="invoiceForm__form-button"
@@ -303,7 +304,8 @@ const InvoiceForm: React.FC = () => {
           >
             Save & Send
           </button>
-        </div>
+        </div> */}
+        <ButtonsFooter isValid={isValidForm} onSave={handleSaveInvoice} />
       </form>
     </>
   );

@@ -1,0 +1,25 @@
+.invoiceForm__form-button {
+  width: 100%;
+  background-color: var(--sidebar-color);
+  outline: none;
+  border: none;
+  border-radius: 24px;
+  height: 48px;
+  margin-top: 1.5rem;
+  color: var(--dark-theme-text-color);
+  cursor: pointer;
+}
+
+.invoiceForm__form-button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.light .invoiceForm__form-button {
+  background-color: #f9fafe;
+  color: var(--light-theme-text-color);
+}
+.invoiceForm__form-button_container {
+  display: flex;
+  gap: 5px;
+}

@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import { openAddForm } from "../../store/features/isAddingNewInvoiceSlice";
 import { iconPlus, iconArrowDown } from "../../assets";
 import "./invoiceNavigation.css";
@@ -8,6 +8,10 @@ interface props {
 }
 
 const InvoiceNavigation: React.FC<props> = ({ length }) => {
+  const isOpenDetail = useAppSelector(
+    (state) => state.isOpenDetail.isShowDetail
+  );
+
   const dispatch = useAppDispatch();
 
   const openInvoiceForm = () => {
@@ -15,7 +19,10 @@ const InvoiceNavigation: React.FC<props> = ({ length }) => {
   };
 
   return (
-    <div className="invoices__invoice-navigation">
+    <div
+      style={{ display: isOpenDetail ? "none" : "" }}
+      className="invoices__invoice-navigation"
+    >
       <div className="invoices__invoice-navigation_title">
         <h3>Invoices</h3>
         <p>{length} invoices</p>

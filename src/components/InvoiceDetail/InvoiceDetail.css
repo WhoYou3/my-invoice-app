@@ -1,0 +1,201 @@
+.invoiceDetail {
+  height: fit-content;
+  max-height: calc(100dvh - 90px);
+  overflow-y: scroll;
+
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: -90px;
+  padding-top: 1rem;
+  background-color: var(--dark-theme-background-color);
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+}
+
+.light .invoiceDetail {
+  background-color: var(--light-theme-background-color);
+}
+
+.invoiceDetail::-webkit-scrollbar {
+  width: 5px;
+
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.invoiceDetail p {
+  font-weight: 100;
+}
+
+.light .invoiceDetail p {
+  color: black;
+  font-weight: 300;
+}
+
+.invoiceDetail__status {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 1.5rem;
+  background-color: var(--sidebar-color);
+  margin-bottom: 1.5rem;
+}
+
+.light .invoiceDetail__status {
+  background-color: var(--light-theme-sidebar);
+}
+
+.invoiceDetail__container {
+  background-color: var(--sidebar-color);
+  padding: 2rem 1.5rem;
+}
+.light .invoiceDetail__container {
+  background-color: var(--light-theme-sidebar);
+}
+.invoiceDetail__container-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoiceDetail__container-header_title {
+  margin-bottom: 1.2rem;
+}
+
+.invoiceDetail__container-description {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+.invoiceDetail__container-description_date {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-right: 1rem;
+}
+.invoiceDetail__container-description_date p {
+  font-weight: 100;
+}
+
+.invoiceDetail__container-description_recipient {
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.invoiceDetail__container-email {
+  margin-top: 1rem;
+}
+
+.invoiceDetail__conteiner-summary {
+  background-color: white;
+  margin-top: 1.5rem;
+  padding: 1rem 1rem;
+  -webkit-box-shadow: -11px 1px 35px -20px rgba(28, 28, 29, 1);
+  -moz-box-shadow: -11px 1px 35px -20px rgba(28, 28, 29, 1);
+  box-shadow: -11px 1px 35px -20px rgba(28, 28, 29, 1);
+
+  background-color: #252945;
+
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  height: fit-content;
+  max-height: 150px;
+  overflow-y: scroll;
+}
+.light .invoiceDetail__conteiner-summary {
+  background-color: var(--light-theme-sidebar);
+}
+
+.invoiceDetail__conteiner-summary::-webkit-scrollbar {
+  width: 5px;
+
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.invoiceDetail__container-summary_itemsbox {
+  display: flex;
+  flex-direction: column;
+}
+
+.invoiceDetail__container-summary_itemsbox div {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.7rem;
+  margin-top: 0.3rem;
+}
+
+.invoiceDetail__container-summary_result {
+  padding: 1rem 1rem;
+
+  background-color: black;
+  -webkit-box-shadow: -11px 1px 35px -20px rgba(28, 28, 29, 1);
+  -moz-box-shadow: -11px 1px 35px -20px rgba(28, 28, 29, 1);
+  box-shadow: -11px 1px 35px -20px rgba(28, 28, 29, 1);
+
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: calc(100% - 5px);
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.light .invoiceDetail__container-summary_result {
+  background-color: #373b53;
+}
+
+.invoiceDetail__container-summary_result p span {
+  font-size: 20px;
+}
+
+.invoiceDetail__container-buttons {
+  margin-top: 1.5rem;
+  background-color: #252945;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.light .invoiceDetail__container-buttons {
+  background-color: var(--light-theme-sidebar);
+}
+
+.invoiceDetail__container-buttons button {
+  height: 35px;
+  width: 80px;
+  border-radius: 24px;
+  outline: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 700px) {
+  .invoiceDetail__container-buttons {
+    justify-content: flex-end;
+    gap: 20px;
+  }
+  .invoiceDetail__container-header {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+  }
+  .invoiceDetail__container-description {
+    padding: 2rem 3rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .invoiceDetail {
+    overflow-y: hidden;
+  }
+  .invoiceDetail__container-description {
+    padding: 2rem 3rem;
+
+    max-width: 600px;
+  }
+}

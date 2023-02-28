@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../store/store";
 import {
   closeAddForm,
   closeEditForm,
@@ -13,12 +13,19 @@ interface props {
 }
 
 const BackLink: React.FC<props> = (props) => {
+  const isOpenEdit = useAppSelector(
+    (state) => state.isAddingOrUpdating.isEditing
+  );
+
   const dispatch = useAppDispatch();
   const closeActions = () => {
     dispatch(closeAddForm());
-    dispatch(closeDetail());
-    dispatch(closeEditForm());
+    if (isOpenEdit) {
+      dispatch(closeEditForm());
+      return;
+    }
     props.onResetState();
+    dispatch(closeDetail());
   };
 
   return (

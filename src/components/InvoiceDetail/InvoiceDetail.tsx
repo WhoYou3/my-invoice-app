@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import BackLink from "../Backer/BackLink";
-import { useAppDispatch } from "../../store/store";
 import { InvoiceType } from "../../Containers/Invoices/InvoiceType";
-
-import { openEditForm } from "../../store/features/IsAddingUpdatingInvoiceSlice";
+import { db } from "../../firebase/firebase-config";
+import { updateDoc, doc, deleteDoc } from "firebase/firestore";
 import "./InvoiceDetail.css";
+import ConfirmAction from "../ConfirmAction/ConfirmAction";
 
 interface Props {
   details: InvoiceType;
@@ -12,7 +12,8 @@ interface Props {
 }
 
 const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
-  const dispatch = useAppDispatch();
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [showMarkConfirm, setShowMarkConfirm] = useState(false);
 
   const date = new Date(details.date);
 
@@ -25,6 +26,36 @@ const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
     year: "numeric",
   });
 
+  const deleteInvoice = async (id: string) => {
+    console.log("tu jestem");
+    const invoicesDoc = doc(db, "Invoices", id);
+    await deleteDoc(invoicesDoc);
+  };
+
+  const markAsPaid = async (id: string) => {
+    console.log("jestem tutaj markaspaid");
+    const invoicesDoc = doc(db, "Invoices", id);
+    const newStatus = { status: "PAID" };
+    await updateDoc(invoicesDoc, newStatus);
+  };
+
+  const closeConfirm = () => {
+    setShowDeleteConfirm(false);
+    setShowMarkConfirm(false);
+  };
+
+  const descriptionDelete = `are you sure you want to delate invoice ${details.id
+    .slice(0, 6)
+    .toUpperCase()}? This action cannot be
+  undone`;
+
+  const descriptionMarkasPaid = `are you sure you want to mark as paid invoice ${details.id
+    .slice(0, 6)
+    .toUpperCase()}? This action cannot be
+  undone`;
+
+  console.log(showDeleteConfirm);
+
   return (
     <>
       <div className="invoiceDetail">
@@ -32,9 +63,14 @@ const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
         <div className="invoiceDetail__status">
           <p>Status</p>
 
-          <p>
-            <span>{details.status}</span>
-          </p>
+          <div
+            className={`invoice__invoice-container_status ${details.status!.toLowerCase()}`}
+          >
+            <div />
+            <p>
+              <span>{details.status}</span>
+            </p>
+          </div>
         </div>
         <div className="invoiceDetail__container">
           <div className="invoiceDetail__container-header">
@@ -96,7 +132,7 @@ const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
                   <span>Item Name</span>
                 </p>
                 <p>
-                  <span>Quantity</span>
+                  <span>Qty.</span>
                 </p>
                 <p>
                   <span>Prize</span>
@@ -128,21 +164,39 @@ const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
         </div>
         <div className="invoiceDetail__container-buttons">
           <button
-            onClick={() => {
-              dispatch(openEditForm());
-            }}
-            style={{ width: "60px", background: "#252945" }}
+            onClick={() => setShowDeleteConfirm(true)}
+            style={{ width: "79px", background: "#EC5757" }}
           >
-            Edit
-          </button>
-          <button style={{ width: "79px", background: "#EC5757" }}>
             Delete
           </button>
-          <button style={{ width: "90px", background: "#7C5DFA" }}>
+          <button
+            onClick={() => setShowMarkConfirm(true)}
+            style={{ width: "90px", background: "#7C5DFA" }}
+          >
             Mark as Paid
           </button>
         </div>
       </div>
+      {showDeleteConfirm ? (
+        <>
+          <ConfirmAction
+            description={descriptionDelete}
+            title="Confirm Deletion"
+            confirmHandler={closeConfirm}
+            buttonName="Delete"
+            buttonAction={() => deleteInvoice(details.id)}
+          />
+        </>
+      ) : null}
+      {showMarkConfirm ? (
+        <ConfirmAction
+          description={descriptionMarkasPaid}
+          title="Confirm Mark as Paid"
+          confirmHandler={closeConfirm}
+          buttonName="Mark as Paid"
+          buttonAction={() => markAsPaid(details.id)}
+        />
+      ) : null}
     </>
   );
 };

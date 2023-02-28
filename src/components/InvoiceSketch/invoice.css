@@ -61,10 +61,13 @@
   background-color: var(--pending-text-color);
 }
 
-.invoice__invoice-container_status.paid,
-.invoice__invoice-container_status.paid div,
+.invoice__invoice-container_status.paid {
+  background-color: var(--paid-color-background);
+}
+.invoice__invoice-container_status.paid div {
+  background-color: var(--paid-color);
+}
 .invoice__invoice-container_status.paid p span {
-  background-color: var(--pending-background-color);
   color: var(--paid-color);
 }
 

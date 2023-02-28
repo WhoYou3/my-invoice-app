@@ -282,30 +282,7 @@ const InvoiceForm: React.FC = () => {
             +Add New Item
           </button>
         </div>
-        {/* <div className="invoiceForm__form-button_container">
-          <button
-            onClick={() => dispatch(closeAddForm())}
-            className="invoiceForm__form-button"
-          >
-            Discard
-          </button>
-          <button
-            style={{ background: "#373B53", color: "white" }}
-            className="invoiceForm__form-button"
-            onClick={() => handleSaveInvoice("DRAFT")}
-            disabled={!isValidForm}
-          >
-            Save as Draft
-          </button>
-          <button
-            onClick={() => handleSaveInvoice("PENDING")}
-            style={{ background: "#7C5DFA", color: "white" }}
-            className="invoiceForm__form-button"
-            disabled={!isValidForm}
-          >
-            Save & Send
-          </button>
-        </div> */}
+
         <ButtonsFooter isValid={isValidForm} onSave={handleSaveInvoice} />
       </form>
     </>

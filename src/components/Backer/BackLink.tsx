@@ -13,17 +13,9 @@ interface props {
 }
 
 const BackLink: React.FC<props> = (props) => {
-  const isOpenEdit = useAppSelector(
-    (state) => state.isAddingOrUpdating.isEditing
-  );
-
   const dispatch = useAppDispatch();
   const closeActions = () => {
     dispatch(closeAddForm());
-    if (isOpenEdit) {
-      dispatch(closeEditForm());
-      return;
-    }
     props.onResetState();
     dispatch(closeDetail());
   };

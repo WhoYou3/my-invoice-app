@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { openAddForm } from "../../store/features/IsAddingUpdatingInvoiceSlice";
 import { iconPlus, iconArrowDown } from "../../assets";
@@ -13,6 +13,7 @@ const InvoiceNavigation: React.FC<props> = ({ length }) => {
   const [isFilterBox, setIsFilterBox] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
+  const dispatch = useAppDispatch();
   const handleCheckboxChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ): void => {
@@ -20,16 +21,17 @@ const InvoiceNavigation: React.FC<props> = ({ length }) => {
     if (event.target.checked) {
       setSelectedOption(value);
     } else {
-      setSelectedOption(null);
+      setSelectedOption("");
     }
-    dispatch(filterStatusValue(value));
   };
+
+  useEffect(() => {
+    dispatch(filterStatusValue(selectedOption));
+  }, [selectedOption]);
 
   const isOpenDetail = useAppSelector(
     (state) => state.isOpenDetail.isShowDetail
   );
-
-  const dispatch = useAppDispatch();
 
   const openInvoiceForm = () => {
     dispatch(openAddForm());

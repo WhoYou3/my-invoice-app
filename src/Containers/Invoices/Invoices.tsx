@@ -10,8 +10,11 @@ const Invoices = () => {
   const [invoices, setInvoices] = useState<InvoiceType[]>([]);
 
   const filterValue = useAppSelector((state) => state.filterValue.filterStatus);
-  console.log(filterValue);
-  console.log("test");
+
+  const filteredInvoices = invoices.filter(
+    (invoice) => invoice.status === filterValue
+  );
+
   useEffect(() => {
     const invoicesCollectionRef = collection(db, "Invoices");
 
@@ -35,10 +38,16 @@ const Invoices = () => {
 
   return (
     <div className="invoices__invoices-container">
-      <InvoiceNavigation length={invoicesLength} />
-      {invoices.map((invoice) => (
-        <Invoice key={invoice.id} invoice={invoice} />
-      ))}
+      <InvoiceNavigation
+        length={filterValue === "" ? invoices.length : filteredInvoices.length}
+      />
+      {filterValue === ""
+        ? invoices.map((invoice) => (
+            <Invoice key={invoice.id} invoice={invoice} />
+          ))
+        : filteredInvoices.map((invoice) => (
+            <Invoice key={invoice.id} invoice={invoice} />
+          ))}
     </div>
   );
 };

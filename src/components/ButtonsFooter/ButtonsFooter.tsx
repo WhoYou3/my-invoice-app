@@ -4,7 +4,7 @@ import { closeAddForm } from "../../store/features/IsAddingUpdatingInvoiceSlice"
 import "./buttonsFooter.css";
 
 interface props {
-  onSave: any;
+  onSave: (status: "PENDING" | "DRAFT") => void;
   isValid: boolean;
 }
 

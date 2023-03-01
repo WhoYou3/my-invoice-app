@@ -8,7 +8,7 @@ import ConfirmAction from "../ConfirmAction/ConfirmAction";
 
 interface Props {
   details: InvoiceType;
-  onResetState: Function;
+  onResetState: () => void;
 }
 
 const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
@@ -27,13 +27,11 @@ const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
   });
 
   const deleteInvoice = async (id: string) => {
-    console.log("tu jestem");
     const invoicesDoc = doc(db, "Invoices", id);
     await deleteDoc(invoicesDoc);
   };
 
   const markAsPaid = async (id: string) => {
-    console.log("jestem tutaj markaspaid");
     const invoicesDoc = doc(db, "Invoices", id);
     const newStatus = { status: "PAID" };
     await updateDoc(invoicesDoc, newStatus);
@@ -53,8 +51,6 @@ const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
     .slice(0, 6)
     .toUpperCase()}? This action cannot be
   undone`;
-
-  console.log(showDeleteConfirm);
 
   return (
     <>

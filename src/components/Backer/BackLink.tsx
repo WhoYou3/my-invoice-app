@@ -1,22 +1,21 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../store/store";
-import {
-  closeAddForm,
-  closeEditForm,
-} from "../../store/features/IsAddingUpdatingInvoiceSlice";
+import { useAppDispatch } from "../../store/store";
+import { closeAddForm } from "../../store/features/IsAddingUpdatingInvoiceSlice";
 import { closeDetail } from "../../store/features/isShowDetailSlice";
 import { iconArrowLeft } from "../../assets";
 import "./backlink.css";
 
 interface props {
-  onResetState?: any;
+  onResetState?: (() => void) | undefined;
 }
 
 const BackLink: React.FC<props> = (props) => {
   const dispatch = useAppDispatch();
   const closeActions = () => {
     dispatch(closeAddForm());
-    props.onResetState();
+    if (props.onResetState) {
+      props.onResetState();
+    }
     dispatch(closeDetail());
   };
 

@@ -1,8 +1,8 @@
 import { Navbar, Invoices, InvoiceMaker } from "./Containers";
 import { useAppSelector } from "./store/store";
+import InvoiceEditor from "./Containers/InvoiceEditor/InvoiceEditor";
 
 import "./App.css";
-import InvoiceEditor from "./Containers/InvoiceEditor/InvoiceEditor";
 
 const App: React.FC = () => {
   const isDarkMode = useAppSelector((state) => state.toggle.isDark);

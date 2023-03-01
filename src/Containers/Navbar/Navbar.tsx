@@ -1,7 +1,7 @@
-import "./navbar.css";
 import { iconMoon, imageAvatar, logo, iconSun } from "../../assets";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { toggleMode } from "../../store/features/toggleModeleSlice";
+import "./navbar.css";
 
 const Navbar: React.FC = () => {
   const dispatch = useAppDispatch();

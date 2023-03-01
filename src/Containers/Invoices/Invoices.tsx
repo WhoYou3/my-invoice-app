@@ -34,8 +34,6 @@ const Invoices = () => {
     };
   }, []);
 
-  const invoicesLength = invoices.length;
-
   return (
     <div className="invoices__invoices-container">
       <InvoiceNavigation

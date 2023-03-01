@@ -11,7 +11,8 @@ interface props {
 
 const InvoiceNavigation: React.FC<props> = ({ length }) => {
   const [isFilterBox, setIsFilterBox] = useState<boolean>(false);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<string | null>("");
+  console.log(isFilterBox);
 
   const dispatch = useAppDispatch();
   const handleCheckboxChange = (
@@ -36,6 +37,7 @@ const InvoiceNavigation: React.FC<props> = ({ length }) => {
   const openInvoiceForm = () => {
     dispatch(openAddForm());
   };
+  console.log(isFilterBox);
 
   return (
     <div
@@ -48,7 +50,7 @@ const InvoiceNavigation: React.FC<props> = ({ length }) => {
       </div>
       <div className="invoices__invoice-navigation_container">
         <div className="invoices__invoice-navigation_filter">
-          {!isFilterBox ? (
+          {isFilterBox ? (
             <div className="invoices__invoice-navigation_filter-options">
               <div>
                 <input
@@ -85,7 +87,7 @@ const InvoiceNavigation: React.FC<props> = ({ length }) => {
             </p>
 
             <img
-              className={isFilterBox ? "" : "animate"}
+              className={isFilterBox ? "animate" : ""}
               src={iconArrowDown}
               alt="arrow down"
             />

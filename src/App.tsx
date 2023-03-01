@@ -12,7 +12,6 @@ const App: React.FC = () => {
   const isEditForm = useAppSelector(
     (state) => state.isAddingOrUpdating.isEditing
   );
-  console.log(isEditForm);
 
   return (
     <div className={`app-container ${isDarkMode ? "dark" : "light"} `}>

@@ -5,12 +5,14 @@ import { TypedUseSelectorHook } from "react-redux/es/types";
 import { ToggleModeSlice } from "./features/toggleModeleSlice";
 import { IsAddingUpdatingInvoiceSlice } from "./features/IsAddingUpdatingInvoiceSlice";
 import { IsOpeningDetailCard } from "./features/isShowDetailSlice";
+import { FilterInvoicesStatus } from "./features/filterInvoices";
 
 export const store = configureStore({
   reducer: {
     toggle: ToggleModeSlice.reducer,
     isAddingOrUpdating: IsAddingUpdatingInvoiceSlice.reducer,
     isOpenDetail: IsOpeningDetailCard.reducer,
+    filterValue: FilterInvoicesStatus.reducer,
   },
 });
 

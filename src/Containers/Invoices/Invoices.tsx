@@ -3,11 +3,15 @@ import { db } from "../../firebase/firebase-config";
 import { InvoiceType } from "./InvoiceType";
 import { collection, onSnapshot, QuerySnapshot } from "firebase/firestore";
 import { Invoice, InvoiceNavigation } from "../../components/index";
+import { useAppSelector } from "../../store/store";
 import "./Invoices.css";
 
 const Invoices = () => {
   const [invoices, setInvoices] = useState<InvoiceType[]>([]);
 
+  const filterValue = useAppSelector((state) => state.filterValue.filterStatus);
+  console.log(filterValue);
+  console.log("test");
   useEffect(() => {
     const invoicesCollectionRef = collection(db, "Invoices");
 

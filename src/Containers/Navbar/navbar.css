@@ -42,6 +42,9 @@
   width: 32px;
   border-radius: 50%;
 }
+.navbar__nav-switcher {
+  cursor: pointer;
+}
 
 @media screen and (min-width: 1024px) {
   .navbar {

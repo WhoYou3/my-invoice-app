@@ -52,7 +52,6 @@ const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
     .toUpperCase()}? This action cannot be
   undone`;
 
-  console.log(details.status);
   return (
     <>
       <div className="invoiceDetail">

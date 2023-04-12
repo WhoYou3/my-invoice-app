@@ -12,7 +12,6 @@ interface props {
 const InvoiceNavigation: React.FC<props> = ({ length }) => {
   const [isFilterBox, setIsFilterBox] = useState<boolean>(false);
   const [selectedOption, setSelectedOption] = useState<string | null>("");
-  console.log(isFilterBox);
 
   const dispatch = useAppDispatch();
   const handleCheckboxChange = (
@@ -28,7 +27,7 @@ const InvoiceNavigation: React.FC<props> = ({ length }) => {
 
   useEffect(() => {
     dispatch(filterStatusValue(selectedOption));
-  }, [selectedOption]);
+  }, [dispatch, selectedOption]);
 
   const isOpenDetail = useAppSelector(
     (state) => state.isOpenDetail.isShowDetail
@@ -37,7 +36,6 @@ const InvoiceNavigation: React.FC<props> = ({ length }) => {
   const openInvoiceForm = () => {
     dispatch(openAddForm());
   };
-  console.log(isFilterBox);
 
   return (
     <div

@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppDispatch, useAppSelector } from "../../store/store";
+import { useAppDispatch } from "../../store/store";
 import { closeDetail } from "../../store/features/isShowDetailSlice";
 import "./ConfirmAction.css";
 
@@ -19,8 +19,7 @@ const ConfirmAction: React.FC<props> = ({
   buttonAction,
 }) => {
   const dispatch = useAppDispatch();
-  const test = useAppSelector((state) => state.isOpenDetail.isShowDetail);
-  console.log(test);
+
   const closeConfirm = () => {
     confirmHandler();
   };

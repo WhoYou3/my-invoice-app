@@ -7,8 +7,13 @@ Application which menage invoices
 <ul>
  <li>React</li>
  <li>Typescript</li>
- <li>Redux/toolkit<li>
+ <li>Redux/toolkit</li>
  <li>Firebase</li>
- 
 </ul>
+
+<h3>How to run ?</h3>
+Just type npm install, api token for firebase is open for this demo 
+
+<h3>Link</h3>
+<a href='https://magical-cannoli-a6b077.netlify.app/'>Invoice app</a>
 

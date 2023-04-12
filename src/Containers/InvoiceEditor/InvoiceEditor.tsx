@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useAppSelector } from "../../store/store";
 import "./invoiceEditor.css";
 
+//  TODO IMPLEMENT INVOICE EDITOR
+// NOT READY YET
 const InvoiceEditor = () => {
   const isEditForm = useAppSelector(
     (state) => state.isAddingOrUpdating.isEditing

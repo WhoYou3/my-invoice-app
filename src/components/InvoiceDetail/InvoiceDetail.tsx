@@ -12,8 +12,8 @@ interface Props {
 }
 
 const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [showMarkConfirm, setShowMarkConfirm] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<boolean>(false);
+  const [showMarkConfirm, setShowMarkConfirm] = useState<boolean>(false);
 
   const date = new Date(details.date);
 
@@ -52,6 +52,7 @@ const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
     .toUpperCase()}? This action cannot be
   undone`;
 
+  console.log(details.status);
   return (
     <>
       <div className="invoiceDetail">
@@ -165,12 +166,14 @@ const InvoiceDetail: React.FC<Props> = ({ details, onResetState }) => {
           >
             Delete
           </button>
-          <button
-            onClick={() => setShowMarkConfirm(true)}
-            style={{ width: "90px", background: "#7C5DFA" }}
-          >
-            Mark as Paid
-          </button>
+          {details.status === "PAID" ? null : (
+            <button
+              onClick={() => setShowMarkConfirm(true)}
+              style={{ width: "90px", background: "#7C5DFA" }}
+            >
+              Mark as Paid
+            </button>
+          )}
         </div>
       </div>
       {showDeleteConfirm ? (

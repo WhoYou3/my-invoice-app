@@ -9,6 +9,7 @@ Application which menage invoices
  <li>Typescript</li>
  <li>Redux/toolkit</li>
  <li>Firebase</li>
+ <li>CSS with BEM methodology</li>
 </ul>
 
 <h3>How to run ?</h3>

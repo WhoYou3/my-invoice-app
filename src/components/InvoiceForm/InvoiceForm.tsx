@@ -5,10 +5,10 @@ import { db } from "../../firebase/firebase-config";
 import { addDoc, collection, CollectionReference } from "firebase/firestore";
 import { DocumentData } from "firebase/firestore";
 import { iconDelete } from "../../assets";
-
-import "./invoiceForm.css";
 import { closeAddForm } from "../../store/features/IsAddingUpdatingInvoiceSlice";
 import ButtonsFooter from "../ButtonsFooter/ButtonsFooter";
+
+import "./invoiceForm.css";
 
 export interface Item {
   [key: string]: string | number;

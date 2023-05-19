@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase-config";
 import { InvoiceType } from "./InvoiceType";
-import { collection, onSnapshot, QuerySnapshot } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  QuerySnapshot,
+} from "firebase/firestore";
 import { Invoice, InvoiceNavigation } from "../../components/index";
 import { useAppSelector } from "../../store/store";
 import "./Invoices.css";

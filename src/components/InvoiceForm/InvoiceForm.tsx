@@ -111,7 +111,7 @@ const InvoiceForm: React.FC = () => {
       costItems += item.quantity * item.price;
       formData.cost = costItems;
       return (
-        <li key={index}>
+        <li data-cy="added-item" key={index}>
           <label htmlFor={`itemName${index}`}>Item Name</label>
           <input
             onChange={(event) => handleItemsInputsValues(index, event)}
@@ -176,7 +176,7 @@ const InvoiceForm: React.FC = () => {
           <label htmlFor="country">Country</label>
           <input id="country" disabled value="United Kingdom"></input>
         </div>
-        <div className="invoiceForm__form-container">
+        <div className="invoiceForm__form-container" data-cy="invoice-form">
           <p>
             <span>Bill To</span>
           </p>

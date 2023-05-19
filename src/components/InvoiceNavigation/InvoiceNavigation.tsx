@@ -92,6 +92,7 @@ const InvoiceNavigation: React.FC<props> = ({ length }) => {
           </div>
         </div>
         <div
+          data-cy="new-form-button"
           onClick={openInvoiceForm}
           className="invoices__invoice-navigation_add"
         >

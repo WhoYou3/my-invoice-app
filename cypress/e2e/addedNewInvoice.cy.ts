@@ -1,6 +1,6 @@
 /// <reference types="Cypress"/>
 
-describe("Form", () => {
+describe("Added new Invoice", () => {
   it("Added form as Draft", () => {
     cy.visit("/");
     cy.get("[data-cy='new-form-button']").click();
@@ -24,6 +24,7 @@ describe("Form", () => {
       cy.get("input").eq(3).should("have.value", values.toFixed(2));
     });
     cy.contains("button", "Save as Draft").click();
+    cy.wait(1000);
   });
 
   it("Added form as Pending", () => {

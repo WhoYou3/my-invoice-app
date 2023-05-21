@@ -23,6 +23,7 @@ describe("Added new Invoice", () => {
       let values = 2 * 150;
       cy.get("input").eq(3).should("have.value", values.toFixed(2));
     });
+    cy.pause();
     cy.contains("button", "Save as Draft").click();
     cy.wait(1000);
   });
